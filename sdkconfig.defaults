@@ -1,0 +1,25 @@
+# Target
+CONFIG_IDF_TARGET="esp32c6"
+
+# Partition table - default single app, no OTA needed for now
+CONFIG_PARTITION_TABLE_SINGLE_APP=y
+
+# WiFi
+CONFIG_ESP_WIFI_SOFTAP_SUPPORT=y
+CONFIG_ESP_WIFI_STA_DISCONNECTED_PM_ENABLE=n
+CONFIG_ESP_WIFI_ENABLE_WPA3_SAE=y
+
+# Increase main task stack a bit since flight control math runs there
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+
+# LWIP - allow enough UDP sockets / faster tick for low-latency control
+CONFIG_LWIP_MAX_SOCKETS=8
+
+# FreeRTOS tick rate - 1000 Hz gives us 1ms scheduling resolution,
+# useful for a tight IMU/control loop
+CONFIG_FREERTOS_HZ=1000
+
+# Disable brownout reset false-triggers from motor current spikes
+# (tune this only if you have proper decoupling caps; do NOT disable
+# brownout detection as a substitute for a good power design)
+CONFIG_ESP_BROWNOUT_DET=y

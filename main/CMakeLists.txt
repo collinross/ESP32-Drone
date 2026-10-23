@@ -1,2 +1,24 @@
-idf_component_register(SRCS "main.c"
-                    INCLUDE_DIRS ".")
+idf_component_register(
+    SRCS
+        "main.c"
+        "mpu6050.c"
+        "imu_filter.c"
+        "motors.c"
+        "leds.c"
+        "battery.c"
+        "comm.c"
+        "flight_control.c"
+    INCLUDE_DIRS "."
+    REQUIRES
+        esp_driver_gpio
+        esp_driver_ledc
+        esp_driver_i2c
+        esp_wifi
+        esp_netif
+        nvs_flash
+        esp_adc
+        lwip
+        esp_event
+        esp_timer
+        freertos
+)
